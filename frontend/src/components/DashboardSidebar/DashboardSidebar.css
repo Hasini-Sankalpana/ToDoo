@@ -1,0 +1,94 @@
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 70px);
+    background: #6b63ff11;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    position: fixed;
+    font-family: "Roboto", sans-serif;  
+    top: 70px;
+    left: 0;
+    z-index: 1000;
+}
+
+.profile-tab.active, 
+.tasks-tab.active,
+.profile-tab.active p, 
+.tasks-tab.active p,
+.profile-tab.active i, 
+.tasks-tab.active i {
+    color: #6C63FF;
+}
+
+.sidebar-tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 10px;
+}
+
+.profile-tab, .tasks-tab {
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s; 
+    color: black;
+}
+
+.profile-tab:hover, .tasks-tab:hover {
+    background: #6b63ff15;
+}
+
+.sidebar-tabs .active {
+    background: #6b63ff2f;
+    color: #6C63FF;
+}
+
+
+.profile-tab p, 
+.tasks-tab p {
+    color: inherit; 
+    font-weight: 400;
+    margin: 0;
+    transition: color 0.3s;
+}
+
+.profile-tab i, 
+.tasks-tab i {
+    color: inherit; 
+    transition: color 0.3s;
+    font-size: 1.2rem;
+}
+
+.sidebar-button {
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
+    margin-top: auto;
+
+}
+
+.sidebar-button button {
+    background-color: #6C63FF;
+    border: none;
+    color: whitesmoke;
+    font-weight: 600;
+    padding: 10px 5px;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-top: auto;
+    border-radius: 5px;
+    width: 150px;
+    justify-self: center;
+}
+
+.sidebar-button button:hover {
+    background: #5a52e0;
+}
