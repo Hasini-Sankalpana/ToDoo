@@ -1,15 +1,22 @@
 import React from 'react'
 import { useState } from 'react'
+import { useLocation} from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar() {
     const[isMenuOpen,setIsMenuOpen] = useState(false)
+    const location = useLocation()
+    const isHomePage = location.pathname === '/'
+
   return (
     <div className={`navbar ${isMenuOpen ? 'menu-open' : ''}`}>
         <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet"/>
        <div className="nav-logo">
          <h2><i class="ri-bubble-chart-fill"></i> ToDoo</h2>
        </div>
+
+       {isHomePage && (
+        <>
        <div className="nav-btn">
             <button className='signin-btn'>Log in</button>
             <button className='signup-btn'>Sign Up</button>
@@ -25,6 +32,8 @@ function Navbar() {
            <button className='menu-signin-btn'>Log in</button>
         </div>
     )}
+    </>
+       )}
     </div>
   )
 }

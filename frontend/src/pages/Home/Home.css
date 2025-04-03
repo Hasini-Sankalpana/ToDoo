@@ -84,13 +84,13 @@
   
   @media (max-width: 768px) {
     .home {
-      padding-top: 100px; 
+      padding-top: 70px; 
       min-height: calc(100vh - 60px);
       margin-top: 0px; 
     }
     
     .home-text h1 {
-      font-size: 2rem;
+      font-size: 3rem;
     }
     
     .home-text p {
