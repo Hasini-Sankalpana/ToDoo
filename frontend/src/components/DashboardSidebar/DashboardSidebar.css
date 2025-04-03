@@ -12,12 +12,10 @@
     z-index: 1000;
 }
 
-.profile-tab.active, 
-.tasks-tab.active,
-.profile-tab.active p, 
-.tasks-tab.active p,
-.profile-tab.active i, 
-.tasks-tab.active i {
+.sidebar-tab.active, 
+.sidebar-tab.active p, 
+.sidebar-tab.active i
+{
     color: #6C63FF;
 }
 
@@ -29,7 +27,7 @@
     padding: 0 10px;
 }
 
-.profile-tab, .tasks-tab {
+.sidebar-tab{
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 7px;
@@ -40,7 +38,7 @@
     color: black;
 }
 
-.profile-tab:hover, .tasks-tab:hover {
+.sidebar-tab:hover {
     background: #6b63ff15;
 }
 
@@ -50,16 +48,14 @@
 }
 
 
-.profile-tab p, 
-.tasks-tab p {
+.sidebar-tab p {
     color: inherit; 
     font-weight: 400;
     margin: 0;
     transition: color 0.3s;
 }
 
-.profile-tab i, 
-.tasks-tab i {
+.sidebar-tab i {
     color: inherit; 
     transition: color 0.3s;
     font-size: 1.2rem;

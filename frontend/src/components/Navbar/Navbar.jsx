@@ -18,8 +18,8 @@ function Navbar() {
        {isHomePage && (
         <>
        <div className="nav-btn">
-       <Link to='/signup'><button className='signin-btn'>Log in</button></Link>
-       <Link to='/signin'><button className='signup-btn'>Sign Up</button></Link>
+       <Link to='/signin'><button className='signin-btn'>Log in</button></Link>
+       <Link to='/signup'><button className='signup-btn'>Sign Up</button></Link>
        </div>
 
        <div className="menu-icon" onClick={()=>setIsMenuOpen(!isMenuOpen)}>

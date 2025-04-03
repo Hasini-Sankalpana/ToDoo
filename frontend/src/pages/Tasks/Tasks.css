@@ -1,0 +1,11 @@
+.tasks-page {
+    display: flex;
+    min-height: 100vh;
+    margin-top: 70px; 
+  }
+  
+  .tasks-content {
+    flex: 1;
+    padding: 0px 50px ;
+    margin-left: 250px; 
+  }
