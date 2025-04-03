@@ -1,0 +1,201 @@
+.signin{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: calc(100vh-70px);
+    margin-top: 70px;
+    font-family:"Roboto", sans-serif ;
+    padding: 0 10%;
+}
+
+.signin-content{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 600px; 
+    width: 100%;
+}
+
+.signin-text h1{
+    font-size: 3.5rem;
+    line-height: 1.2;
+    color: #000000;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.google-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: transparent;
+    border: 1px solid #dadada;
+    border-radius: 7px;
+    width:400px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.google-btn:hover{
+    background-color: #f0f0f0;
+}
+
+.google-btn img{
+    width: 20px;
+    height: 20px;
+}
+
+.google-btn h2{
+    font-size: 1rem;
+    color: #000000;
+    font-weight: 600;
+    margin: 0;
+}
+
+.signin-form input{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 400px;
+    padding: 10px 15px;
+    border: 1px solid #cccaca;
+    border-radius: 7px;
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 400px; 
+    margin-bottom: 10px;
+  }
+  
+  .password-input {
+    width: 100%;
+    padding: 10px 40px 10px 15px; 
+    border: 1px solid #cccaca;
+    border-radius: 7px;
+    font-size: 1rem;
+  }
+  
+  .eye-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #5d5b5b;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+  }
+  
+  .eye-toggle:hover {
+    color: #6C63FF;
+  }
+
+.signin-form-btn{
+    color: whitesmoke;
+    background-color: #6C63FF;
+    padding: 12px 30px;
+    border-radius: 7px;
+    font-size: 1rem;
+    width: 400px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 0px;
+}
+
+.signin-form-btn:hover {
+    background-color: #5a52e0;
+}
+
+.forgot-password {
+    color:#5d5b5b ;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    margin-top: 10px;
+}
+
+.signin-footer{
+   font-size: 0.9rem;
+   margin-bottom: 50px;
+}
+
+.signin-image img{
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    filter: drop-shadow(-4px 0 8px rgba(0,0,0,0.1));
+}
+
+@media (max-width: 1024px) {
+    .signin {
+      padding: 0 5%;
+    }
+    
+    .signin-text h1 {
+      font-size: 2.8rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .signin {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 5% 60px;
+      gap: 40px;
+    }
+
+    .signin-content {
+      align-items: center;
+    }
+    
+    .signin-image {
+      display: none;
+    }
+    
+    .signin-text h1 {
+      font-size: 2.2rem;
+    }
+    
+    
+    .google-btn {
+      padding: 12px;
+    }
+
+    .signin-form input{
+        justify-self: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .signin-text h1 {
+      font-size: 1.8rem;
+    }
+    
+    .signin-form input {
+      padding: 12px 15px;
+      width: 200px;
+    }
+
+    .input-wrapper {
+        width: 200px;
+      }
+
+    .google-btn{
+        width: 200px;
+    }
+
+    .signin-form-btn{
+        width: 200px;
+    }
+  }

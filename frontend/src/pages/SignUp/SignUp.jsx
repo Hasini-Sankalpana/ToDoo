@@ -2,7 +2,7 @@ import React from 'react'
 import './SignUp.css'
 import { RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
 import googleLogo from '../../assets/google-btn.png'
-import signupImage from '../../assets/signup-img2.png'
+import signupImage from '../../assets/signup-img.png'
 
 function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
@@ -35,7 +35,7 @@ function SignUp() {
             className="eye-toggle"
             onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           >
-            {showConfirmPassword ? <RiEyeOffLine /> : <RiEyeLine />}
+            {showConfirmPassword ? <RiEyeLine /> : <RiEyeOffLine />}
           </button>
         </div>
             <button className='signup-form-btn'>Sign Up</button>
@@ -43,7 +43,7 @@ function SignUp() {
           </form>
         </div>
         <div className="signup-footer">
-          <p>Already have an account? <a href='/'>Log In</a></p>
+          <p>Already have an account? <a href='/signin'>Log In</a></p>
         </div>
       </div>
       <div className="signup-image">
