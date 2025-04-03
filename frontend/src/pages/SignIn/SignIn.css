@@ -117,11 +117,12 @@
     background-color: #5a52e0;
 }
 
-.forgot-password {
+.signin-forgot-password {
     color:#5d5b5b ;
     font-size: 0.7rem;
     line-height: 1.2;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .signin-footer{

@@ -36,8 +36,8 @@ function SignIn() {
           </button>
         </div>
             <button className='signin-form-btn'>Sign In</button>
-            <div className="forgot-password">
-              <p>Forgot Password?</p>
+            <div className="signin-forgot-password">
+              <a href='/forgot-password'>Forgot Password?</a>
             </div>
           </form>
         </div>

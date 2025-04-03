@@ -1,6 +1,7 @@
 import React from 'react'
 import './Home.css'
 import homeImage from '../../assets/home.png'
+import { Link } from 'react-router-dom'
 
 function Home() {
   return (
@@ -14,7 +15,7 @@ function Home() {
        <span class="circle" aria-hidden="true">
         <span class="icon arrow"></span>
         </span>
-         <button className='home-signup-btn'>Get Started</button>
+        <Link to='/signup'><button className='home-signup-btn'>Get Started</button></Link>
        </div>
        </div>
        <div className="home-img">

@@ -20,11 +20,16 @@
     margin-right: 2px;
 }
 
+.logo-link{
+    text-decoration: none;
+    color: #6C63FF;
+}
+
 .nav-btn{
     display: flex;
     flex-direction: row;
     gap: 30px;
-    
+    align-items: center;
 }
 
 
@@ -33,6 +38,7 @@
     background: transparent;
     color: #5d5b5b;
     cursor: pointer;
+    
 }
 
 .signin-btn:hover{
