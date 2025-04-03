@@ -4,6 +4,7 @@
     gap: 1rem;
     height: calc(100vh-70px);
     font-family:"Roboto", sans-serif ;
+    padding: 1rem;
 }
 
 .add-tasks{
@@ -11,6 +12,7 @@
     flex-direction: row;
     gap :1rem;
     align-items: center;
+    padding: 0.5rem;
 }
 
 .add-icon{
@@ -18,6 +20,11 @@
     background-color: #6C63FF;
     padding: 8px;
     border-radius: 50%;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 .add-icon i{
@@ -32,6 +39,7 @@
 
 .add-tasks h2{
     color: #6C63FF;
+    font-size: 1.6rem;
 }
 
 .tasks-list{
@@ -47,10 +55,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .task-list-head h2{
     font-size: 2rem;
+    margin: 0;
 }
 
 .task-list-head button{
@@ -62,12 +73,46 @@
     border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .task-list-head button:hover{
     background-color: #47bff7;
     
 }
+
+.task-list-sort{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+
+.task-list-sort h5{
+    font-size: 1rem;
+    color: #000000;
+}
+
+.task-list-sort select{
+    padding: 8px 20px;
+    width: 150px;
+    border: none;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+.task-list-sort option{
+    background-color: #f0f0f0;
+    font-weight: 600;
+}
+
+.task-list-sort select option:hover{
+    background-color: #d62f2f;
+}
+
 
 .task-list-container{
     width: 100%;
@@ -98,3 +143,51 @@
     cursor: pointer;
 }
 
+
+@media (max-width: 768px) {
+    .user-tasks {
+        height: auto;
+        padding: 0.75rem;
+    }
+
+    .task-list-head {
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .task-list-sort {
+        width: 100%;
+    }
+
+    .task-list-sort select {
+        max-width: 100%;
+    }
+
+    .task {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .task-actions {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-tasks h2 {
+        font-size: 1.1rem;
+    }
+     
+    .task-list-sort{
+        flex-direction: column;
+    }
+    .task-list-head button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    .task {
+        padding: 0.75rem;
+    }
+    
+}

@@ -27,6 +27,13 @@ function UserTasks() {
         </div>
         <button>Today</button>
         </div>
+        <div className="task-list-sort">
+            <h5>Sort By : </h5>
+            <select name="sort" id="sort">
+              <option value="date">Date</option>
+              <option value="priority">Priority</option>
+            </select>
+        </div>
         <div className="task-list-container">
           <div className="task">
           <h5><AddTask
