@@ -63,7 +63,7 @@ export const googleAuth = async (req, res) => {
             const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
             return res.status(200).json({
                 success: true,
-                message: "User already exists",
+                message: "User signed in successfully",
                 token,
                 user: {
                     fullname: existingUser.fullname,
@@ -97,5 +97,35 @@ export const googleAuth = async (req, res) => {
     }catch (error) {
         console.error(error);
         res.status(500).json({ success:false, message: "Internal server error" });
+    }
+}
+
+export const login = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ success: false, message: "User not found !" });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ success: false, message: "Incorrect Password" });
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({
+            success: true,
+            message: "User Signed in successfully",
+            token,
+            user: {
+                fullname: user.fullname,
+                email: user.email,
+            },
+        });
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
