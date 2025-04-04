@@ -53,3 +53,49 @@ export const register = async (req, res) => {
         res.status(500).json({ success:false, message: "Internal server error" });
     }
 }
+
+export const googleAuth = async (req, res) => {
+    const {name,email} = req.body;
+
+    try {
+        const existingUser = await User.findOne({ email });
+        if(existingUser) {
+            const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            return res.status(200).json({
+                success: true,
+                message: "User already exists",
+                token,
+                user: {
+                    fullname: existingUser.fullname,
+                    email: existingUser.email,
+                },
+            });
+        }else {
+            const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+            const hashedPassword = bcrypt.hashSync(generatedPassword, 10);
+
+            const newUser = new User({
+                fullname: name,
+                email,
+                password: hashedPassword,
+            });
+
+            await newUser.save();
+
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+            res.status(201).json({
+                success: true,
+                message: "User registered successfully",
+                token,
+                user: {
+                    fullname: newUser.fullname,
+                    email: newUser.email,
+                },
+            });
+        }
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ success:false, message: "Internal server error" });
+    }
+}

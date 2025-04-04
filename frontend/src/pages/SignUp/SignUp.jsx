@@ -6,6 +6,8 @@ import signupImage from '../../assets/signup-img.png'
 import axios from 'axios'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../firebase'; 
 
 function SignUp() {
   const [fullName, setFullName] = useState('');
@@ -68,6 +70,29 @@ function SignUp() {
     }
   };
 
+  const handleGoogleSignUp = async () => {
+    try{
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const {displayName, email} = user;
+      const response = await axios.post('http://localhost:3000/api/user/google', {
+        name: displayName,
+        email: email,
+      });
+
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.token);
+        navigate('/dashboard');
+      }else{
+        setErrorMessage(response.data.message);
+      }
+    }catch(error){
+      console.error('Google Sign Up Error:', error);
+      setErrorMessage('Google Sign Up failed. Please try again.');
+    }
+  }
+
   return (
     <div className='signup'>
       <div className="signup-content">
@@ -75,7 +100,7 @@ function SignUp() {
           <h1>Welcome to <span>ToDoo</span></h1>
           <p>Get Started - It's free.</p>
         </div>
-        <div className="google-btn">
+        <div className="google-btn" onClick={handleGoogleSignUp}>
           <img src={googleLogo} alt="google-logo" />
           <h2>Sign up with Google</h2>
         </div>
