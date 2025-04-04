@@ -64,9 +64,15 @@
     margin: 0;
 }
 
-.task-list-head button{
+.list-status{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.today, .overdue, .completed{
     color: white;
-    background-color: #4FC3F7;
     width: 100px;
     padding: 10px 20px;
     border: none;
@@ -76,9 +82,28 @@
     font-size: 0.9rem;
 }
 
-.task-list-head button:hover{
+.today{
+    background-color: #4FC3F7;
+}
+
+.overdue{
+    background-color: #EF5350;
+}
+.completed{
+    background-color: #66BB6A
+}
+
+
+
+.today:hover{
     background-color: #47bff7;
-    
+}
+
+.overdue:hover{
+    background-color: #dd3e3b;
+}
+.completed:hover{
+    background-color: #54bc52;
 }
 
 .task-list-sort{
@@ -139,8 +164,18 @@
     gap: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: pointer;
+}
+
+.ri-pencil-fill:hover{
+    color: #47bff7;
+}
+.ri-delete-bin-6-fill:hover{
+    color: #EF5350;
+}
+.ri-checkbox-circle-fill:hover{
+    color: #66BB6A;
 }
 
 

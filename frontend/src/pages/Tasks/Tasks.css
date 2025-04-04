@@ -1,7 +1,6 @@
-.tasks-page {
+.tasks{
     display: flex;
-    min-height: 100vh;
-    margin-top: 70px; 
+    min-height: calc(100vh - 70px);
   }
   
   .tasks-content {

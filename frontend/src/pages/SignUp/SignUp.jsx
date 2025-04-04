@@ -20,15 +20,16 @@ function SignUp() {
         </div>
         <div className="signup-form">
           <form>
-            <input type="text" placeholder='Full Name' />
-            <input type="email" placeholder='Email Address' />
-            <input type="password" placeholder='Password' />
+            <input type="text" placeholder='Full Name' required/>
+            <input type="email" placeholder='Email Address' required/>
+            <input type="password" placeholder='Password' required/>
             
           <div className="input-wrapper">
           <input
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
             className="password-input"
+            required
           />
           <button
             type="button"

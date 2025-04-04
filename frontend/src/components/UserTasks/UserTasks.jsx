@@ -25,7 +25,11 @@ function UserTasks() {
         <div className="list-title">
           <h2>Task List</h2>
         </div>
-        <button>Today</button>
+        <div className="list-status">
+        <button className='today'>Today</button>
+        <button className='overdue'>Overdue</button>
+        <button className='completed'>Completed</button>
+        </div>
         </div>
         <div className="task-list-sort">
             <h5>Sort By : </h5>
@@ -44,6 +48,7 @@ function UserTasks() {
            <div className="task-actions">
            <i class="ri-pencil-fill"></i>
            <i class="ri-delete-bin-6-fill"></i>
+           <i class="ri-checkbox-circle-fill"></i>
            </div>
           </div>
         </div>
