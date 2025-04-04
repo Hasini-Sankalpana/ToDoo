@@ -9,6 +9,7 @@ import ResetPassword from './pages/ResetPassword/ResetPassword'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Tasks from './pages/Tasks/Tasks'
 import Profile from './pages/Profile/Profile'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -20,9 +21,13 @@ function App() {
         <Route path="/signin" element={<SignIn/>} />
         <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/reset-password" element={<ResetPassword/>} />
+
+        <Route element={<ProtectedRoute/>}>
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/dashboard/tasks" element={<Tasks/>} />
         <Route path="/dashboard/profile" element={<Profile/>} />
+        </Route>
+
       </Routes>
     </div>
   )
