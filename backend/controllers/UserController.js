@@ -34,7 +34,7 @@ export const register = async (req, res) => {
         const savedUser = await newUser.save();
         //console.log('user saved:', savedUser);
 
-        const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
 
         console.log('Generated Token:', token);  
         
@@ -60,7 +60,7 @@ export const googleAuth = async (req, res) => {
     try {
         const existingUser = await User.findOne({ email });
         if(existingUser) {
-            const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
             return res.status(200).json({
                 success: true,
                 message: "User signed in successfully",
@@ -82,7 +82,7 @@ export const googleAuth = async (req, res) => {
 
             await newUser.save();
 
-            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
 
             res.status(201).json({
                 success: true,
@@ -114,7 +114,7 @@ export const login = async (req, res) => {
             return res.status(400).json({ success: false, message: "Incorrect Password" });
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '10h' });
         res.status(200).json({
             success: true,
             message: "User Signed in successfully",

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddTask.css';
 import { RiCalendarLine, RiFlagLine, RiTimeLine } from 'react-icons/ri';
 
-function AddTask({ isOpen, onClose }) {
+function AddTask({ isOpen, onClose, taskToEdit, onTaskUpdate }) {
   const [task, setTask] = useState({
     title: '',
     dueDate: '',
@@ -10,41 +10,91 @@ function AddTask({ isOpen, onClose }) {
     priority: 'medium',
     notes: ''
   });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if(taskToEdit) {
+      setTask({
+        title: taskToEdit.title,
+        dueDate: taskToEdit.dueDate,
+        dueTime: taskToEdit.dueTime,
+        priority: taskToEdit.priority,
+        notes: taskToEdit.notes
+      });
+    }else{
+      setTask({
+        title: '',
+        dueDate: '',
+        dueTime: '',
+        priority: 'medium',
+        notes: ''
+      });
+    }
+  }, [taskToEdit]);
+  
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTask(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    if (!task.title.trim()) return;
+  const validate = () => {
+    const errors = {};
+    if (!task.title.trim()) errors.title = 'Title is required.';
+    if (!task.dueDate) errors.dueDate = 'Due date is required.';
+    if (task.dueDate) {
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0); 
+      if (new Date(task.dueDate) < currentDate) {
+        errors.dueDate = 'Due date cannot be in the past.';
+      }
+    }
+    if (!task.dueTime) errors.dueTime = 'Due time is required.';
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
-    try{
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validate()) return; 
+
+    try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:3000/api/tasks/createtasks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(task),
-      });
+      const url = taskToEdit 
+      ? `http://localhost:3000/api/tasks/edittasks/${taskToEdit._id}`
+      : 'http://localhost:3000/api/tasks/createtasks';
+    
+    const method = taskToEdit ? 'PATCH' : 'POST';
+
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(task),
+    });
 
       const data = await response.json();
       console.log('Task created:', data);
 
       if (response.ok) {
-        console.log('Task created:', data);
-    } else {
-        console.error('Error creating task:', data);
-    }
+       if (taskToEdit) {
+          onTaskUpdate(data.task);
+        }else{
+          onClose(data.task);
+        }
+      //  console.log('Task created:', data);
 
-      onClose();
-    }catch (error) {
+      } else {
+        console.error('Error creating task:', data);
+      }
+    } catch (error) {
       console.error('Error creating task:', error);
     }
-  }
+  };
 
   const handleClose = () => {
     setTask({
@@ -55,7 +105,7 @@ function AddTask({ isOpen, onClose }) {
       notes: ''
     });
     onClose();
-  }
+  };
 
   if (!isOpen) return null;
 
@@ -63,9 +113,9 @@ function AddTask({ isOpen, onClose }) {
     <div className="add-task-overlay" onClick={onClose}>
       <div className="add-task-content" onClick={e => e.stopPropagation()}>
         <div className="add-task-header">  
-          <h2>Add New Task</h2>
+          <h2>{taskToEdit ? 'Edit task':'Add New Task'}</h2>
         </div>
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Title*</label>
@@ -76,8 +126,8 @@ function AddTask({ isOpen, onClose }) {
               onChange={handleChange}
               placeholder="Add your task here..."
               autoFocus
-              required
             />
+            {errors.title && <p className="error">{errors.title}</p>}
           </div>
 
           <div className="form-row">
@@ -90,6 +140,7 @@ function AddTask({ isOpen, onClose }) {
                 onChange={handleChange}
                 min={new Date().toISOString().split('T')[0]}
               />
+              {errors.dueDate && <p className="error">{errors.dueDate}</p>}
             </div>
 
             <div className="form-group">
@@ -100,6 +151,7 @@ function AddTask({ isOpen, onClose }) {
                 value={task.dueTime}
                 onChange={handleChange}
               />
+              {errors.dueTime && <p className="error">{errors.dueTime}</p>}
             </div>
 
             <div className="form-group">
@@ -129,7 +181,7 @@ function AddTask({ isOpen, onClose }) {
 
           <div className="add-task-actions">
             <button type="button" onClick={handleClose}>Cancel</button>
-            <button type="submit" className="primary">Add Task</button>
+            <button type="submit" className="primary"> {taskToEdit ? 'Update Task' : 'Add Task'}</button>
           </div>
         </form>
       </div>

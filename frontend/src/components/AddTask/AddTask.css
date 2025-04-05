@@ -105,6 +105,19 @@
   .add-task-actions .primary:hover {
     background: #5a52e0;
   }
+
+  .error {
+    color: #e74c3c; 
+    font-size: 0.875rem; 
+    margin-top: 0.25rem; 
+    font-weight: 500;
+    text-align: left; 
+  }
+  
+  .input-error {
+    border: 1px solid #e74c3c;  
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5); 
+  }
   
   @keyframes fadeIn {
     from { opacity: 0; }

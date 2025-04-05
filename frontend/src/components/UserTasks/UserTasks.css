@@ -82,9 +82,28 @@
     font-size: 0.9rem;
 }
 
-.today{
-    background-color: #4FC3F7;
-}
+
+.toggle-filter {
+    color: white;
+    width: 120px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background-color: #ebc950;
+  }
+  
+ 
+  .toggle-filter.today {
+    background-color: #4FC3F7; 
+  }
+  
+  .toggle-filter:hover {
+    opacity: 0.9;
+  }
+
 
 .overdue{
     background-color: #EF5350;
@@ -141,12 +160,23 @@
 
 .task-list-container{
     width: 100%;
-    height: auto;
+    height: 380px;
     overflow-y: auto;
     background: transparent;
-   
+    padding: 10px;
 }
 
+.task-list-container::-webkit-scrollbar {
+    width: 0; 
+  }
+  
+  .task-list-container::-webkit-scrollbar-thumb {
+    background-color: transparent; 
+  }
+  
+  .task-list-container::-webkit-scrollbar-track {
+    background-color: transparent; 
+  }
 .task {
     display: flex;
     flex-direction: row;
@@ -155,6 +185,7 @@
     border-radius: 10px;
     width: 100%;
     padding: 15px 20px;
+    margin-bottom: 10px;
 }
 
 .task-actions{
@@ -177,6 +208,72 @@
 .ri-checkbox-circle-fill:hover{
     color: #66BB6A;
 }
+
+.active {
+    filter: brightness(90%);
+    transform: scale(0.98);
+  }
+  
+  .loading, .no-tasks {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+  }
+  
+  .task-content {
+    flex: 1;
+  }
+  
+  .task-title {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .task-details {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .task-details i {
+    margin-right: 5px;
+  }
+  
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltip-text {
+    visibility: hidden;
+    width: max-content;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+  }
+  
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .task-notes{
+    font-size: 14px;
+    color: #4d4c4c;
+    margin-top: 5px;
+  }
 
 
 @media (max-width: 768px) {
