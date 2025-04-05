@@ -67,6 +67,8 @@
 
   <p><strong>Tasks Page</strong></p>
   <img src="https://github.com/user-attachments/assets/0bffb098-42c2-4d07-af6d-1ab2887fa89b" alt="Tasks Page" width="600"/>
+    <p><strong>Add Task Feature</strong></p>
+  <img src="https://github.com/user-attachments/assets/772b5039-881e-4ed7-8124-74a54b0677c9" alt="Add tasks" width="600"/>
 
   <p><strong>Profile Page</strong></p>
   <img src="https://github.com/user-attachments/assets/4a2aa7dd-381c-414d-907e-b9f6cd8be575" alt="Profile Page" width="600"/>
