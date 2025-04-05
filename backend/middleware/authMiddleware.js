@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-
+import mongoose from 'mongoose';
 
 const authMiddleware = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1]; 
@@ -9,12 +9,30 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token,process.env.JWT_SECRET); 
-    req.user = decoded;  
-    next();  
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    console.log('Decoded token:', decoded); 
+    
+    if (!decoded.id) {
+      return res.status(403).json({ 
+        success: false, 
+        message: 'Token missing user identification' 
+      });
+    }
+    
+   
+    req.user = { 
+      _id: new mongoose.Types.ObjectId(decoded.id) 
+    };
+    
+    next();
   } catch (error) {
-    console.error('Error verifying token:', error);
-    return res.status(403).json({ success: false, message: 'Invalid or expired token' });
+    console.error('JWT verification error:', error);
+    return res.status(403).json({ 
+      success: false, 
+      message: 'Invalid or expired token',
+      error: error.message 
+    });
   }
 };
 

@@ -16,12 +16,35 @@ function AddTask({ isOpen, onClose }) {
     setTask(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (!task.title.trim()) return;
-    console.log('Task to be saved:', task);
-    onClose();
-  };
+
+    try{
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:3000/api/tasks/createtasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(task),
+      });
+
+      const data = await response.json();
+      console.log('Task created:', data);
+
+      if (response.ok) {
+        console.log('Task created:', data);
+    } else {
+        console.error('Error creating task:', data);
+    }
+
+      onClose();
+    }catch (error) {
+      console.error('Error creating task:', error);
+    }
+  }
 
   const handleClose = () => {
     setTask({
@@ -32,8 +55,7 @@ function AddTask({ isOpen, onClose }) {
       notes: ''
     });
     onClose();
-  };
-
+  }
 
   if (!isOpen) return null;
 
