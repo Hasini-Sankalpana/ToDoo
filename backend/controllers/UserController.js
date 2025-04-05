@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import User from '../models/UserModel.js';
 
+
 dotenv.config();
 
 export const register = async (req, res) => {
@@ -129,3 +130,62 @@ export const login = async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 }
+
+
+export const changePassword = async (req, res) => {
+    try{
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({
+                success: false,
+                message: "Not authenticated"
+            });
+        }
+
+
+        const user = await User.findById(req.user._id);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+
+        const validPassword = await bcrypt.compare(req.body.oldPassword, user.password);
+        if(!validPassword) {
+            return res.status(400).json({ success: false, message: "Invalid Password" });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(req.body.newPassword, salt);
+
+        await user.save();
+        res.status(200).json({ success: true, message: "Password changed successfully" });
+
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Error changing password" });
+    }
+}	
+
+
+export const getUser = async (req, res) => {
+    try {
+        
+        const user = await User.findById(req.user._id).select("-password -__v");
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+        res.status(200).json({
+            name: user.fullname,
+            email: user.email,
+         });
+
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+}
+

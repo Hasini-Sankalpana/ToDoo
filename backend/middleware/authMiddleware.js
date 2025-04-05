@@ -12,8 +12,10 @@ const authMiddleware = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
     console.log('Decoded token:', decoded); 
+
+    const userId=decoded._id || decoded.id;
     
-    if (!decoded.id) {
+    if (!userId) {
       return res.status(403).json({ 
         success: false, 
         message: 'Token missing user identification' 
@@ -22,7 +24,7 @@ const authMiddleware = (req, res, next) => {
     
    
     req.user = { 
-      _id: new mongoose.Types.ObjectId(decoded.id) 
+      _id: new mongoose.Types.ObjectId(userId) 
     };
     
     next();
