@@ -27,7 +27,7 @@ function SignIn() {
       
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
-        navigate('/dashboard'); 
+        navigate('/dashboard', { replace: true }); 
       }else{
         setErrorMessage(response.data.message);
       }
