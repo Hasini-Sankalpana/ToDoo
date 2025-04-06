@@ -13,6 +13,10 @@ function UserTasks() {
   const [expandedTask, setExpandedTask] = useState(null);
   const [editingTask, setEditingTask] = useState(null);
 
+  const handleToggleTaskDetails = (taskId) => {
+    setExpandedTask(expandedTask === taskId ? null : taskId);
+  };
+
   const handleEditClick = (task) => {
     setEditingTask(task);
     setIsAddTaskOpen(true);
@@ -86,12 +90,14 @@ function UserTasks() {
       case 'today':
         return tasks.filter(task => {
           const taskDate = new Date(task.dueDate);
-          return taskDate.toDateString() === today.toDateString();
+          taskDate.setHours(0, 0, 0, 0);
+          return taskDate.getTime() === today.getTime();
         });
       case 'overdue':
         return tasks.filter(task => {
           const taskDate = new Date(task.dueDate);
-          return taskDate < today && !task.completed;
+          taskDate.setHours(0, 0, 0, 0);
+          return taskDate < today;
         });
       default:
         return tasks;
